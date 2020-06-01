@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Каталог товаров{% endblock %}
+
+{% block body_block %}
+    <main>
+    	<h2 align="center">Ловцы снов</h2>
+
+        {% for dream in dreamcatchers %}
+            <h3>{{ dream }}</h3>
+            <div class="star">
+            <div><img src="{{ dream.photo.url }}" width="320" height="240" title="{{ dream }}"></div>
+            <ul>
+                <li>
+                    <p class="height">
+                        {{ dream.description }}
+                    </p>
+                </li>
+                <li class="text-box">
+                    <p>
+		    			Диаметр: {{ dream.diameter }} см
+                    </p>
+                </li>
+                <li class="order">
+                    Цена: {{ dream.cost }} руб.
+                </li>
+                <a class="button" href="{% url 'form' %}?type_=dreamcatcher&id_={{ dream.id }}">Заказать</a>
+            </ul>
+        </div>
+        {% endfor %}
+    	
+<!--    	<h3>Ловец 1</h3>-->
+
+<!--    	<div class="sleep">-->
+<!--            <div><img src="{% static 'img/photo-5.jpg' %}" width="250" height="300" title="Ловец 1"></div>-->
+<!--            <ul>-->
+<!--                <li>-->
+<!--                    <p class="height">-->
+<!--                        Певая попытка сделать что-то нормальное.-->
+<!--                    </p>-->
+<!--                </li>-->
+<!--                <li class="text-box">-->
+<!--                    <p>-->
+<!--		    			Диаметр 15 см-->
+<!--                    </p>-->
+<!--                </li>-->
+<!--                <li class="order">-->
+<!--                    Цена: 150 руб.-->
+<!--                </li>-->
+<!--                <a class="button" href="{% url 'form' %}">Заказать</a>-->
+<!--            </ul>-->
+<!--        </div>-->
+
+<!--    	<h3>Ловец 2</h3>-->
+<!--    	-->
+<!--    	<div class="sleep">-->
+<!--            <ul>-->
+<!--                <li>-->
+<!--                    <p class="height">-->
+<!--                        Вторая, более удачная попытка сделать что-то адекватное.-->
+<!--                    </p>-->
+<!--                </li>-->
+<!--                <li class="text-box">-->
+<!--                    <p>-->
+<!--		    			Диаметр 10 см-->
+<!--                    </p>-->
+<!--                </li>-->
+<!--                <li class="order">-->
+<!--                    Цена: 150 руб.-->
+<!--                </li>-->
+<!--                <a class="button" href="{% url 'form' %}">Заказать</a>-->
+<!--            </ul>-->
+<!--        <div><img src="{% static 'img/photo-55.jpg' %}" width="250" height="300" title="Ловец 2"></div>-->
+<!--        </div>-->
+<!--    	-->
+<!--    	<h3>Ловец 3</h3>-->
+<!--    	-->
+<!--    	<div class="sleep">-->
+<!--            <div><img src="{% static 'img/photo-555.jpg' %}" width="250" height="300" title="Ловец 3"></div>-->
+<!--            <ul>-->
+<!--                <li>-->
+<!--                    <p class="height">-->
+<!--                        Третья, менее удачная попытка сделать что-то адекватное.-->
+<!--                    </p>-->
+<!--                </li>-->
+<!--                <li class="text-box">-->
+<!--                    <p>-->
+<!--		    			Диаметр 12 см-->
+<!--                    </p>-->
+<!--                </li>-->
+<!--                <li class="order">-->
+<!--                    Цена: 150 руб.-->
+<!--                </li>-->
+<!--                <a class="button" href="{% url 'form' %}">Заказать</a>-->
+<!--            </ul>-->
+<!--        </div>-->
+    </main>
+{% endblock %}

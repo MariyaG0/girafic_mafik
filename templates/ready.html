@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Выполненные заказы{% endblock %}
+
+{% block body_block %}
+    <main>
+    	<h2 align="center">Выполненные заказы</h2>
+    	
+    	{% if boxes_ %}
+            <h2>Коробки</h2>
+        {% endif %}
+        {% for box in boxes_ %}
+            <h3>{{ box }}</h3>
+            <div class="star">
+            <div><img src="{{ box.photo.url }}" width="320" height="240" title="{{ box }}"></div>
+            <ul>
+                <li>
+                    <p class="height">
+                        {{ box.description }}
+                    </p>
+                </li>
+                <li class="text-box">
+                    <p>
+		    			Длина: {{ box.lenght }}<br>
+		    			Ширина: {{ box.width }}<br>
+						Высота: {{ box.height }}<br>
+                    </p>
+                </li>
+                <li class="order">
+                    Цена: {{ box.cost }} руб.
+                </li>
+                <a class="button" href="{% url 'form' %}?type_=box&id_={{ box.id }}">Заказать такое же</a>
+            </ul>
+        </div>
+        {% endfor %}
+
+        {% if dreamcatchers %}
+            <h2>Ловцы снов</h2>
+        {% endif %}
+        {% for dream in dreamcatchers %}
+            <h3>{{ dream }}</h3>
+            <div class="star">
+            <div><img src="{{ dream.photo.url }}" width="320" height="240" title="{{ dream }}"></div>
+            <ul>
+                <li>
+                    <p class="height">
+                        {{ dream.description }}
+                    </p>
+                </li>
+                <li class="text-box">
+                    <p>
+		    			Диаметр: {{ dream.diameter }} см
+                    </p>
+                </li>
+                <li class="order">
+                    Цена: {{ dream.cost }} руб.
+                </li>
+                <a class="button" href="{% url 'form' %}?type_=dreamcatcher&id_={{ dream.id }}">Заказать такое же</a>
+            </ul>
+        </div>
+        {% endfor %}
+
+        {% if letters %}
+            <h2>Конверты</h2>
+        {% endif %}
+        {% for letter in letters %}
+            <h3>{{ letter }}</h3>
+            <div class="star">
+            <div><img src="{{ dream.photo.url }}" width="320" height="240" title="{{ letter }}"></div>
+            <ul>
+                <li>
+                    <p class="height">
+                        {{ letter.description }}
+                    </p>
+                </li>
+                <li class="text-box">
+                    <p>
+		    			Диаметр: {{ letter.diameter }} см
+                    </p>
+                </li>
+                <li class="order">
+                    Длина: {{ last_actual.lenght }}<br>
+                    Ширина: {{ last_actual.width }}<br>
+                    Цвет: {{ last_actual.color }}<br>
+                </li>
+                <a class="button" href="{% url 'form' %}?type_=letter&id_={{ letter.id }}">Заказать такое же</a>
+            </ul>
+        </div>
+        {% endfor %}
+
+<!--    	<h3>Какая-то книга</h3>-->
+<!--    	-->
+<!--    	<div class="star">-->
+<!--            <ul>-->
+<!--                <li>-->
+<!--                    <p class="height">-->
+<!--                        Да я фиг знает что это за книга и кому она нафиг нужна.-->
+<!--                    </p>-->
+<!--                </li>-->
+<!--                <li class="text-box">-->
+<!--                    <p>-->
+<!--		    			Длина: Кто вообще<br>-->
+<!--		    			Ширина: смотрит на<br>-->
+<!--						Высота: размеры книги?<br>-->
+<!--                    </p>-->
+<!--                </li>-->
+<!--                <li class="order">-->
+<!--                    Цена: 50 руб.-->
+<!--                </li>-->
+<!--                <a class="button" href="{% url 'form' %}">Заказать такое же</a>-->
+<!--            </ul>-->
+<!--        <div><img src="{% static 'img/photo-8.jpg' %}" width="320" height="230" title="Какая-то книга"></div>-->
+<!--        </div>-->
+<!--    	-->
+<!--    	<h3>Какая-то фоторамка</h3>-->
+<!--    	-->
+<!--    	<div class="star">-->
+<!--            <div><img src="{% static 'img/photo-9.jpg' %}" width="320" height="180" title="Какая-то фоторамка"></div>-->
+<!--            <ul>-->
+<!--                <li>-->
+<!--                    <p class="height">-->
+<!--                        Большая балда, на которую я потратила целый рулон упаковочной бумаги.-->
+<!--                    </p>-->
+<!--                </li>-->
+<!--                <li class="text-box">-->
+<!--                    <p>-->
+<!--		    			Длина: Очень<br>-->
+<!--		    			Ширина: большая<br>-->
+<!--						Высота: фигня<br>-->
+<!--                    </p>-->
+<!--                </li>-->
+<!--                <li class="order">-->
+<!--                    Цена: 50 руб.-->
+<!--                </li>-->
+<!--                <a class="button" href="{% url 'form' %}">Заказать такое же</a>-->
+<!--            </ul>-->
+<!--        </div>-->
+    </main>
+{% endblock %}

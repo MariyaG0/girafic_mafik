@@ -1,0 +1,337 @@
+header{
+	background-color: #3fe9fe;
+	font-size: 20px;
+}
+
+body{
+	background-color: #c8f9ff;
+	font-family: Century Gothic;
+	width: 1200px;
+	margin: 0 auto;
+}
+
+section{
+	font-style: italic;
+}
+
+footer{
+	background-color: #3fe9fe;
+	margin-top: 80px;
+}
+
+.footer a{
+	text-decoration: none;
+}
+
+.button {
+	display: inline-block;
+	background-color: #3fe9fe;
+	border-radius: 15px;
+
+	text-align: center;
+	vertical-align: middle;
+	text-transform: uppercase;
+	text-decoration: none;
+	border: none;
+
+	margin: 0;
+	padding: 20px 40px;
+}
+
+.button:hover,
+.button:focus,
+.button:active {
+	background-color: #3fe9fe;
+	color: #017380;
+	outline: none;
+	box-shadow: 0 0 5px #017380;
+	border-radius: 15px;
+	border-color: #017380;
+}
+
+.entrance__submit button{
+	margin-top: 50px;
+}
+
+a{
+	color: #01535d;
+}
+
+.visually-hidden:not(:focus):not(:active),
+input[type="checkbox"].visually-hidden,
+input[type="file"].visually-hidden,
+input[type="radio"].visually-hidden {
+position: absolute;
+clip: rect(0 0 0 0);
+width: 1px;
+height: 1px;
+margin: -1px;
+
+border: 0;
+padding: 0;
+
+overflow: hidden;
+white-space: nowrap;
+clip-path: inset(100%);
+}
+
+
+h2{
+	color: #01535d;
+	font-size: 40px;
+	margin: 75px 0;
+}
+
+h3{
+	color: #01535d;
+	font-size: 30px;
+	margin-left: 50px;
+}
+
+.h3{
+	text-decoration: none;
+}
+
+li{
+	list-style: none;
+}
+
+img{
+	max-width: 100%;
+	height: auto;
+}
+
+.main-header{
+	text-align: center;
+}
+
+.delivery{
+	padding-top: 0;
+	opacity: 0.5;
+}
+
+.main-header p{
+	margin: 0;
+	padding: 0;
+}
+
+.site-navigation{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0;
+	padding: 0;
+}
+
+.site-navigation li{
+	display: inline-block;
+	margin: 5px 30px;
+	padding-bottom: 0;
+}
+
+.site-navigation a{
+	text-decoration: none;
+}
+
+.services ul{
+	display: flex;
+	justify-content: space-between;
+	margin: 0;
+	padding: 0;
+}
+
+.services li{
+	padding: 0;
+	color: #01535d;
+}
+
+.star{
+	display: flex;
+	padding: 0;
+	justify-content: space-between;
+	margin-bottom: 100px;
+}
+
+.star p{
+	padding: 0;
+	margin: 15px 30px;
+}
+.star ul{
+	padding: 0;
+	margin: 0 50px;
+}
+.star img{
+	 min-width: 512px;
+	 min-height: 300px;
+	 margin-left: 50px;
+}
+
+.star .button{
+	margin-left: 50px;
+}
+
+.text-box{
+	padding-top: 70px;
+	margin: 0 100px;
+	font-size: 20px;
+	text-decoration: underline;
+}
+.order{
+	margin-top: 60px;
+	margin-bottom: 5px;
+	margin-left: 50px;
+	font-size: 20px;
+}
+
+.sleep{
+	display: flex;
+	padding: 0;
+	justify-content: space-between;
+	margin-bottom: 100px;
+}
+
+.sleep p{
+	padding: 0;
+	margin: 30px 30px;
+}
+.sleep ul{
+	padding: 0;
+	margin: 20px 50px;
+}
+.sleep img{
+	 min-width: 400px;
+	 min-height: 534px;
+	 margin-left: 50px;
+}
+
+.sleep button{
+	margin-left: 50px;
+}
+
+.about{
+	margin-bottom: 150px;
+
+}
+.about div{
+	display: flex;
+}
+.about p{
+	width: 450px;
+	font-size: 20px;
+	margin-left: 100px;
+}
+
+.about .flower::before{
+	content: url("../img/icon-1.png");
+	display: block;
+}
+
+.about .gift::before{
+	content: url("../img/icon-2.png");
+	display: block;
+}
+
+.about .money::before{
+	content: url("../img/icon-3.png");
+	display: block;
+}
+
+.about .heart::before{
+	content: url("../img/icon-4.png");
+	display: block;
+}
+
+.height{
+	font-size: 20px;
+}
+
+
+.comments {
+	display: flex;
+	margin: 0;
+	padding: 0;
+}
+.rewiew {
+	display: block;
+	margin-bottom: 20px;
+	font-family: Monotype Corsiva;
+	font-size: 30px;
+}
+.comments > * {
+	margin: 0 100px;
+}
+
+/*
+то же самое будет делать еще:
+.comments .comment-item {
+margin: 0 100px;
+padding: 0;
+}
+только тогда надо развесить comment-item в html:
+<section class="comments">
+<p class="comment-item">
+<span class="rewiew">
+</span>
+Анастасия
+</p>
+<button class="button comment-item">
+</section>
+*/
+.main-form {
+    margin: 40px;
+    width: 400px;
+}
+.main-form input[type="text"] {
+	border: none;
+	background: none;
+    padding: 10px;
+    margin-left: 30px;
+    width: 100%;
+}
+.main-form-item {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 10px 0;
+}
+.main-form-label {
+	width: 100px;
+}
+.main-form-label::before {
+	content: "";
+	position: absolute;
+	background-color: #000000;
+	width: 300px;
+	height: 2px;
+	bottom: 0;
+	margin-left: 100px;
+}
+
+.pform{
+	font-size: 30px;
+}
+
+
+.ready{
+	display: flex;
+	padding: 0;
+	justify-content: space-between;
+	margin-bottom: 100px;
+}
+
+.ready p{
+	padding-bottom: 50px;
+	margin: 10px 30px;
+}
+
+.ready img{
+	 min-width: 512px;
+	 min-height: 300px;
+	 margin-left: 50px;
+}
+
+.ready button{
+	margin-left: 50px;
+}
+

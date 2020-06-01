@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Магазин "Jiraffik Maffik"{% endblock %}
+
+{% block body_block %}
+        <section class="product-of-the-week">
+            <h3>{{ last_actual }}</h3>
+            <div class="star">
+            <div><img src="{{ last_actual.photo.url }}" width="320" height="240" title="{{ last_actual }}"></div>
+            <ul>
+                <li>
+                    <p class="height">
+                        {{ last_actual.description }}
+                    </p>
+                </li>
+                <li class="text-box">
+                    <p>
+                        {% if type_of_item == 'box' %}
+		    			Длина: {{ last_actual.lenght }}<br>
+		    			Ширина: {{ last_actual.width }}<br>
+						Высота: {{ last_actual.height }}<br>
+
+                        {% elif type_of_item == 'letter' %}
+		    			Длина: {{ last_actual.lenght }}<br>
+		    			Ширина: {{ last_actual.width }}<br>
+						Цвет: {{ last_actual.color }}<br>
+
+                        {% elif type_of_item == 'dream' %}
+		    			Димаетр: {{ last_actual.diameter }}
+                        {% endif %}
+                    </p>
+                </li>
+                <li class="order">
+                    Цена: {{ last_actual.cost }} руб.
+                </li>
+                <a class="button" href="{% url 'form' %}?type_={% if type_of_item == 'box' %}box{% elif type_of_item == 'dream' %}dreamcatcher{% elif type_of_item == 'letter' %}letter{% endif %}&id_={{ last_actual.id }}">Заказать</a>
+            </ul>
+        </div>
+        </section>
+
+        <h3>Коротко о нас:</h3>
+        <section class="about">
+            <div>
+                <p class="flower">Экологически чистые материалы</p>
+                <p class="gift">Сделано вручную с любовью и умилением</p>
+            </div>
+            <div>
+                <p class="money">Крепкие коробки по приемлемой цене</p>
+                <p class="heart">Увеличивает радость в глазах окружающих</p>
+            </div>
+        </section>
+
+        <h3>Отзывы</h3>
+
+        <section class="comments">
+            <p>
+                <span class="rewiew">
+                Классная коробочка, рекомендую!
+                </span>
+                Анастасия Красильникова<br>
+                @misssssiskras
+            </p>
+            <a class="button" href="{% url 'review' %}">Написать</a>
+        </section>
+{% endblock %}

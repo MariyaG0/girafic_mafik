@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Профиль{% endblock %}
+
+{% block body_block %}
+    <main style="margin-left: 50px">
+        <h2 align="center">Профиль</h2>
+        Здравствуйте, {{ user }}!<br>
+        {% if orders %}
+            Ваши заказы:<br><br>
+            {% for order in orders %}
+                <h4>{{ order }}</h4>
+                    {% if order.order_with_box %}
+                        {% if order.order_with_box.name %}
+                            {{ order.order_with_box.name }}<br><br>
+                        {% endif %}
+                            <div>
+                                Длина: {{ order.order_with_box.lenght }}см<br>
+                                Ширина: {{ order.order_with_box.width }}см<br>
+                                Высота: {{ order.order_with_box.height }}см<br>
+                            </div>
+                    {% endif %}
+                    {% if order.order_with_dreamcatcher %}
+                        {% if order.order_with_dreamcatcher.name %}
+                            {{ order.order_with_dreamcatcher.name }}<br><br>
+                        {% endif %}
+                            <div>
+                                Диаметр: {{ order.order_with_dreamcatcher.diameter }}см<br>
+                            </div>
+                        {% endif %}
+                    {% if order.order_with_letter %}
+                        {% if order.order_with_letter.name %}
+                            {{ order.order_with_letter.name }}<br><br>
+                        {% endif %}
+                            <div>
+                                Длина: {{ order.order_with_letter.lenght }}см<br>
+                                Ширина: {{ order.order_with_letter.width }}см<br>
+                                Цвет: {{ order.order_with_letter.color }}<br>
+                            </div>
+                    {% endif %}
+                Статус заказа: {% if order.ready %} Выполнен {% else %} Выполняется {% endif %}
+            {% endfor %}
+            <br><br><a class="button" href="{% url 'form' %}">Новый заказ</a>
+        {% else %}
+            У вас еще нет заказов<br><br>
+            <a class="button" href="{% url 'form' %}">Сделать первый заказ</a>
+        {% endif %}
+    </main>
+{% endblock %}

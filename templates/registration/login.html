@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Вход{% endblock %}
+{% block body_block %}
+
+<h2 align="center">Введите данные для входа в аккаунт:</h2>
+<form method="POST" style="margin-left: 40%">
+    {% csrf_token %}
+    {{ form.as_p}}
+    <button class="button" type="submit">Войти</button>
+    <br>
+    <br>
+    <a href="{% url 'sign_up' %}">Зарегестрироваться</a>
+</form>
+
+{% endblock %}

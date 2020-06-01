@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Каталог товаров{% endblock %}
+
+{% block body_block %}
+	<main>
+    	<h2 align="center">Милые подарочные коробки</h2>
+
+        {% for box in boxes %}
+            <h3>{{ box }}</h3>
+            <div class="star">
+            <div><img src="{{ box.photo.url }}" width="320" height="240" title="{{ box }}"></div>
+            <ul>
+                <li>
+                    <p class="height">
+                        {{ box.description }}
+                    </p>
+                </li>
+                <li class="text-box">
+                    <p>
+		    			Длина: {{ box.lenght }}<br>
+		    			Ширина: {{ box.width }}<br>
+						Высота: {{ box.height }}<br>
+                    </p>
+                </li>
+                <li class="order">
+                    Цена: {{ box.cost }} руб.
+                </li>
+                <a class="button" href="{% url 'form' %}?type_=box&id_={{ box.id }}">Заказать</a>
+            </ul>
+        </div>
+        {% endfor %}
+
+<!--    	<h3>Праздничная коробка "Круги"</h3>-->
+<!--    	-->
+<!--    	<div class="star">-->
+<!--            <div><img src="{% static 'img/photo-2.jpg' %}" width="320" height="240" title="Коробка 'Круги'"></div>-->
+<!--            <ul>-->
+<!--                <li>-->
+<!--                    <p class="height">-->
+<!--                        Плотная коробка для упаковки небольшого подарка.-->
+<!--                    </p>-->
+<!--                </li>-->
+<!--                <li class="text-box">-->
+<!--                    <p>-->
+<!--		    			Длина: 17 см<br>-->
+<!--		    			Ширина: 10.5 см<br>-->
+<!--						Высота: 9.5 см<br>-->
+<!--                    </p>-->
+<!--                </li>-->
+<!--                <li class="order">-->
+<!--                    Цена: 80 руб.-->
+<!--                </li>-->
+<!--                <a class="button" href="{% url 'form' %}">Заказать</a>-->
+<!--            </ul>-->
+<!--        </div>-->
+
+<!--    	<h3>Праздничная коробка "Деревянная"</h3>-->
+<!--    	-->
+<!--    	<div class="star">-->
+<!--            <ul>-->
+<!--                <li>-->
+<!--                    <p class="height">-->
+<!--                        Компактная коробка небольших размеров для упаковки приятных мелочей для близких.-->
+<!--                    </p>-->
+<!--                </li>-->
+<!--                <li class="text-box">-->
+<!--                    <p>-->
+<!--		    			Длина: 15.3 см<br>-->
+<!--		    			Ширина: 10.3 см<br>-->
+<!--						Высота: 6 см<br>-->
+<!--                    </p>-->
+<!--                </li>-->
+<!--                <li class="order">-->
+<!--                    Цена: 70 руб.-->
+<!--                </li>-->
+<!--                <a class="button" href="{% url 'form' %}">Заказать</a>-->
+<!--            </ul>-->
+<!--        <div><img src="{% static 'img/photo-3.jpg' %}" width="320" height="230" title="Коробка 'Деревянная'"></div>-->
+<!--        </div>-->
+<!--    	-->
+<!--    	<h3>Праздничная коробка "Особая"</h3>-->
+<!--    	-->
+<!--    	<div class="star">-->
+<!--            <div><img src="{% static 'img/photo-4.jpg' %}" width="320" height="180" title="Коробка 'Особая'"></div>-->
+<!--            <ul>-->
+<!--                <li>-->
+<!--                    <p class="height">-->
+<!--                        Плоская коробка для упаковки практичных подарков.-->
+<!--                    </p>-->
+<!--                </li>-->
+<!--                <li class="text-box">-->
+<!--                    <p>-->
+<!--		    			Длина: 15.2 см<br>-->
+<!--		    			Ширина: 11.8 см<br>-->
+<!--						Высота: 3.5 см<br>-->
+<!--                    </p>-->
+<!--                </li>-->
+<!--                <li class="order">-->
+<!--                    Цена: 50 руб.-->
+<!--                </li>-->
+<!--                <a class="button" href="{% url 'form' %}">Заказать</a>-->
+<!--            </ul>-->
+<!--        </div>-->
+        <form method="POST">
+            {% csrf_token %}
+<!--            {{ some_form.as_p }}-->
+            <button class="button" type="submit">Отправить</button>
+        </form>
+    </main>
+{% endblock %}

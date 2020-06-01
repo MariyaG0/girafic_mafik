@@ -1,0 +1,216 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Оформление заказа{% endblock %}
+
+{% block body_block %}
+    <main>
+        {% if sent %}
+            <h2 align="center">Ваш заказ принят</h2>
+            <p class="pform">
+                Спасибо за заказ!<br>
+                Мы свяжемся с вами в ближайшее время, чтобы уточнить детали.
+            </p>
+        {% else %}
+            <h2 align="center">Форма заказа</h2>
+            <p class="pform">
+                Мы будем рады воплотить в жизнь ваши пожелания!<br>
+                Заполните простую форму заказа и мы свяжемся с вами, чтобы уточнить детали.
+            </p>
+
+            <form class="order_form" method="POST">
+                {% csrf_token %}
+
+                <h3>Данные о заказчике</h3>
+                {{ client_data_form.as_p }}
+
+                <h3>Характеристики изделия</h3>
+                <div class="{% if box %} visually-hidden {% elif dreamcatcher %} visually-hidden {% elif letter %} visually-hidden {% endif %}">
+                Выберите тип подарка:<br>
+                <input class="input_box" type="radio" value="box" id="box" name="present" checked>
+                <label for=box>Коробка</label><br>
+                <input class="input_dreamcatcher" type="radio" value="dreamcatcher" id="dreamcatcher" name="present">
+                <label for=dreamcatcher>Ловец снов</label><br>
+                <input class="input_letter" type="radio" value="letter" id="letter" name="present">
+                    <label for=letter>Конверт</label><br>
+                </div>
+                    <div class="box_order_form {% if box %} box_from_cat {% endif %}">
+                        {% if box %}
+                        <h3>{{ box }}</h3>
+                            <div class="star">
+                                <div><img src="{{ box.photo.url }}" width="320" height="240" title="{{ box }}"></div>
+                                <ul>
+                                    <li>
+                                        <p class="height">
+                                            {{ box.description }}
+                                        </p>
+                                    </li>
+                                    <li class="text-box">
+                                        <p>
+                                            Длина: {{ box.lenght }}<br>
+                                            Ширина: {{ box.width }}<br>
+                                            Высота: {{ box.height }}<br>
+                                        </p>
+                                    </li>
+                                    <li class="order">
+                                        Цена: {{ box.cost }} руб.
+                                    </li>
+                                </ul>
+                        </div>
+                        {% endif %}
+                        <div class="{% if box %}visually-hidden{% endif %}">
+                            {{ box_order_form.as_p }}
+                        </div>
+                        <button class="entrance__submit button" name="button_box_order_form" type="submit">Отправить заказ</button>
+                    </div>
+                    <div class="dreamcatcher_order_form visually-hidden {% if dreamcatcher %} dreamcatcher_from_cat {% endif %}">
+                        {% if dreamcatcher %}
+                            <h3>{{ dreamcatcher }}</h3>
+                                <div class="star">
+                                <div><img src="{{ dreamcatcher.photo.url }}" width="320" height="240" title="{{ dreamcatcher }}"></div>
+                                <ul>
+                                    <li>
+                                        <p class="height">
+                                            {{ dreamcatcher.description }}
+                                        </p>
+                                    </li>
+                                    <li class="text-box">
+                                        <p>
+                                            Диаметр: {{ dreamcatcher.diameter }} см
+                                        </p>
+                                    </li>
+                                    <li class="order">
+                                        Цена: {{ dreamcatcher.cost }} руб.
+                                    </li>
+                                    </ul>
+                            </div>
+                        {% endif %}
+                        <div class="{% if dreamcatcher %}visually-hidden{% endif %}">
+                            {{ dreamcatcher_order_form.as_p }}
+                        </div>
+                        <button class="entrance__submit button" name="button_dreamcatcher_order_form" type="submit">Отправить заказ</button>
+                    </div>
+                    <div class="letter_order_form visually-hidden {% if letter %} letter_from_cat {% endif %}">
+                        {% if letter %}
+                            <h3>Новогодние конверты</h3>
+                                <div class="star">
+                                <div><img src="{{ letter.photo.url }}" width="320" height="240" title="{{ letter }}"></div>
+                                <ul>
+                                    <li>
+                                        <p class="height">
+                                            {{ letter.description }}
+                                        </p>
+                                    </li>
+                                    <li class="text-box">
+                                        <p>
+                                            Длина: {{ letter.lenght }}<br>
+                                            Ширина: {{ letter.width }}<br>
+                                            Цвет: {{ letter.color }}<br>
+                                        </p>
+                                    </li>
+                                    <li class="order">
+                                        Цена: {{ letter.cost }} руб.
+                                    </li>
+                                    <a class="button" href="{% url 'form' %}?type_=letter&id_={{ letter.id }}">Заказать</a>
+                                </ul>
+                            </div>
+                        {% endif %}
+                        <div class="{% if letter %}visually-hidden{% endif %}">
+                        {{ letter_order_form.as_p }}
+                        </div>
+                        <button class="entrance__submit button" name="button_letter_order_form" type="submit">Отправить заказ</button>
+                    </div>
+            </form>
+            {{ box }}, {{ dreamcatcher }}, {{ letter }}
+        {% endif %}
+<script>
+    input_box = document.querySelector(".input_box");
+    input_dreamcatcher = document.querySelector(".input_dreamcatcher");
+    input_letter = document.querySelector(".input_letter");
+    box_order_form = document.querySelector(".box_order_form");
+    dreamcatcher_order_form = document.querySelector(".dreamcatcher_order_form");
+    letter_order_form = document.querySelector(".letter_order_form");
+    input_box.addEventListener("click", function(event) {
+    box_order_form.classList.remove("visually-hidden");
+    dreamcatcher_order_form.classList.add("visually-hidden");
+    letter_order_form.classList.add("visually-hidden");
+    });
+    if (box_order_form.classList.contains("box_from_cat")) {
+        input_box.click();
+        box_order_form.querySelectorAll("input").forEach(function callback(element, index, array) {
+        element.setAttribute('readonly', 'readonly');
+        });
+        }
+    input_dreamcatcher.addEventListener("click", function(event) {
+    box_order_form.classList.add("visually-hidden");
+    dreamcatcher_order_form.classList.remove("visually-hidden");
+    letter_order_form.classList.add("visually-hidden");
+    });
+    if (dreamcatcher_order_form.classList.contains("dreamcatcher_from_cat")) {
+        input_dreamcatcher.click();
+        dreamcatcher_order_form.querySelectorAll("input").forEach(function callback(element, index, array) {
+        element.setAttribute('readonly', 'readonly');
+        });
+    }
+    input_letter.addEventListener("click", function(event) {
+    box_order_form.classList.add("visually-hidden");
+    dreamcatcher_order_form.classList.add("visually-hidden");
+    letter_order_form.classList.remove("visually-hidden");
+    });
+    if (letter_order_form.classList.contains("letter_from_cat")) {
+        input_letter.click();
+        letter_order_form.querySelectorAll("input").forEach(function callback(element, index, array) {
+        element.setAttribute('readonly', 'readonly');
+        });
+    }
+</script>
+<!--        <form class="main-form" action="#" method="post">-->
+<!--            <h3>Размеры подарка</h3>-->
+<!--            <div class="main-form-item">-->
+<!--                <label class="main-form-label" for="main-form-length">Длина:</label>-->
+<!--                <input class="main-form-length" id="main-form-length" type="text" name="length" placeholder="Укажите Длину">-->
+<!--            </div>-->
+
+<!--            <div class="main-form-item">-->
+<!--                <label class="main-form-label" for="main-form-width">Ширина:</label>-->
+<!--                <input class="main-form-width" id="main-form-width" type="text" name="width" placeholder="Укажите Ширину">-->
+<!--            </div>-->
+
+<!--            <div class="main-form-item">-->
+<!--                <label class="main-form-label" for="main-form-height">Высота:</label>-->
+<!--                <input class="main-form-height" id="main-form-height" type="text" name="height" placeholder="Укажите Высоту">-->
+<!--            </div>-->
+
+<!--            <h3>Данные о заказчике</h3>-->
+
+<!--            <div class="main-form-item">-->
+<!--                <label class="main-form-label" for="main-form-surname">Фамилия:</label>-->
+<!--                <input class="main-form-surname" id="main-form-surname" type="text" name="surname" placeholder="Укажите Фамилию">-->
+<!--            </div>-->
+
+<!--            <div class="main-form-item">-->
+<!--                <label class="main-form-label" for="main-form-name">Имя:</label>-->
+<!--                <input class="main-form-name" id="main-form-name" type="text" name="name" placeholder="Укажите Имя">-->
+<!--            </div>-->
+
+<!--            <div class="main-form-item">-->
+<!--                <label class="main-form-label" for="main-form-patronymic">Отчество:</label>-->
+<!--                <input class="main-form-patronymic" id="main-form-patronymic" type="text" name="patronymic" placeholder="Укажите Отчество">-->
+<!--            </div>-->
+
+<!--            <div class="main-form-item">-->
+<!--                <label class="main-form-label" for="main-form-phone">Телефон:</label>-->
+<!--                <input class="main-form-phone" id="main-form-phone" type="text" name="phone" placeholder="Укажите Телефон">-->
+<!--            </div>-->
+
+<!--            <div class="main-form-item">-->
+<!--                <label class="main-form-label" for="main-form-mail">E-mail:</label>-->
+<!--                <input class="main-form-mail" id="main-form-mail" type="text" name="mail" placeholder="Укажите E-mail">-->
+<!--            </div>-->
+
+<!--            <p><i>-->
+<!--                * Все поля являются обязательными-->
+<!--            </i></p>-->
+<!--        </form>-->
+    </main>
+{% endblock %}
